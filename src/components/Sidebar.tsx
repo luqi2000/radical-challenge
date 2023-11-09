@@ -15,7 +15,10 @@ const Sidebar = () => {
             <div className="sidebar-size d-flex flex-column align-items-center">
               <Button
                 variant="outline"
-                className={`mb-4 ${location.pathname === "/" && "bg-primary enlarged"}`}
+                className={`mb-4 ${
+                  (location.pathname === "/" && "bg-primary") ||
+                  (location.pathname === "/listBestSellers" && "bg-primary")
+                }`}
                 onClick={() => {
                   navigate("/listBestSellers");
                 }}>

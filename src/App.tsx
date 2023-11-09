@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import MyNavbar from "./components/Mynavbar";
 import HomePage from "./components/HomePage";
-import ListBestSellers from "./components/ListBestSellers";
+import ListBestSellers from "./components/ListBestSellersPage";
 
 function App() {
   return (
