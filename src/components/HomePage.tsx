@@ -3,9 +3,15 @@ import Sidebar from "./Sidebar";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { saveBooks } from "../redux/actions";
 
-interface Book {
+export interface Book {
   book_image: string;
+  author: string;
+  contributor: string;
+  price: string;
+  rank: number;
 }
 
 const apiKey = "iNWy3urIqs8tcFxmoTOinObGaHcuzvOq";
@@ -14,22 +20,25 @@ const apiUrl = "https://api.nytimes.com/svc/books/v3/lists/full-overview.json";
 const HomePage = () => {
   const [randomImages, setRandomImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${apiUrl}?api-key=${apiKey}`);
         const data = await response.json();
+        console.log(data);
         const books: Book[] = data.results.lists[0].books;
+        dispatch(saveBooks(books)); //dispatch of one action with name saveBooks with payload books
 
-        // Prendere 3 immagini casuali
+        // taking 3 random images
         const randomIndices = Array.from({ length: 3 }, () => Math.floor(Math.random() * books.length));
         const randomBooks = randomIndices.map(index => books[index]);
 
-        // Prendere i link delle immagini
+        // taking link of the images
         const images = randomBooks.map(book => book.book_image);
 
-        // Aggiungere le immagini
+        // adding images
         setRandomImages(images);
       } catch (error) {
         console.error("Error during fetch API", error);
@@ -39,7 +48,7 @@ const HomePage = () => {
     };
 
     fetchData();
-  }, []); // L'array vuoto significa che useEffect verrà eseguito una volta al mount
+  }, [dispatch]);
 
   return (
     <>

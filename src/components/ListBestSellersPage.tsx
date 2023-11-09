@@ -1,8 +1,13 @@
-import { Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
+import { FaRegHeart } from "react-icons/fa";
 import Search from "./Search";
+import { RootState } from "../redux/store";
 
 const ListBestSellersPage = () => {
+  const books = useSelector((state: RootState) => state.book.books);
+
   return (
     <>
       <Container fluid>
@@ -15,11 +20,20 @@ const ListBestSellersPage = () => {
                 <Search />
               </div>
               <ListGroup>
-                <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                {books.map((book, index) => (
+                  <ListGroup.Item key={index}>
+                    <div className="d-flex">
+                      <p>{book.author}</p>
+                      <p> {book.contributor}</p>
+                      <p>{book.price}</p>
+                      <p>{book.rank}</p>
+                      <Button>
+                        {" "}
+                        <FaRegHeart />
+                      </Button>
+                    </div>
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
             </div>
           </Col>
@@ -28,4 +42,5 @@ const ListBestSellersPage = () => {
     </>
   );
 };
+
 export default ListBestSellersPage;
