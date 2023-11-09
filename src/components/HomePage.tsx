@@ -63,7 +63,7 @@ const HomePage = () => {
                 ) : (
                   <Row>
                     {randomImages.map((image, index) => (
-                      <Col key={index} md={6} lg={4}>
+                      <Col key={index} md={6} lg={4} className="mb-3">
                         <Image fluid src={image} style={{ width: "320px", height: "200px" }} />
                       </Col>
                     ))}
