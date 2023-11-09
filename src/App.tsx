@@ -2,10 +2,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
+import MyNavbar from "./components/Mynavbar";
 
 function App() {
   return (
     <>
+      <MyNavbar />
       <BrowserRouter>
         <Routes>
           <Route path="/"></Route>
