@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
-import MyNavbar from "./components/Mynavbar";
+import MyNavbar from "./components/MyNavbar";
 import HomePage from "./components/HomePage";
 import FavouritePage from "./components/FavouritesPage";
 import UpdatePage from "./components/UpdatePage";

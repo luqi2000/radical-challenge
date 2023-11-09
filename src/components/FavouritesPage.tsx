@@ -1,4 +1,10 @@
+import Sidebar from "./Sidebar";
+
 const FavouritesPage = () => {
-  return <></>;
+  return (
+    <>
+      <Sidebar />
+    </>
+  );
 };
 export default FavouritesPage;

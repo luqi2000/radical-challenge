@@ -21,7 +21,13 @@ const Sidebar = () => {
             }}>
             <BsBarChart className="icon-size" />
           </Button>
-          <Button variant="outline" className="mb-4">
+
+          <Button
+            variant="outline"
+            className={`mb-4 ${location.pathname === "/favourites" && "bg-primary"}`}
+            onClick={() => {
+              navigate("/favourites");
+            }}>
             <FaRegHeart className="icon-size " />
           </Button>
           <Button variant="outline" className="mb-4">
