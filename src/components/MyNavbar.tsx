@@ -4,7 +4,7 @@ import UserPicture from "../assets/luqmanPicture.jpg";
 const MyNavbar = () => {
   return (
     <>
-      <Container fluid className="">
+      <Container fluid className="positionNavbar">
         <Row>
           <Col xs="auto" className="custom-bg-color-user d-flex justify-content-center align-items-center">
             <Image

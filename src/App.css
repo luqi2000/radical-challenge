@@ -1,6 +1,9 @@
 .custom-bg-color-user {
   background-color: #8fc4c0;
 }
+.positionNavbar {
+  position: fixed;
+}
 .custom-taller-col {
   min-height: 50px;
 }
