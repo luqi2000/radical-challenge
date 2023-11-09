@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import NotFound from "./components/NotFound";
 import MyNavbar from "./components/Mynavbar";
 import HomePage from "./components/HomePage";
+import ListBestSellers from "./components/ListBestSellers";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />}></Route>
-          <Route path="/"></Route>
+          <Route path="/listBestSellers" element={<ListBestSellers />}></Route>
           <Route></Route>
           <Route></Route>
           <Route path="*" element={<NotFound />}></Route>

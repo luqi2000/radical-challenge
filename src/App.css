@@ -21,3 +21,8 @@
 .homepage-bg {
   background-color: rgb(231, 231, 231);
 }
+
+.enlarged {
+  width: 5 rem;
+  height: 5 rem;
+}
