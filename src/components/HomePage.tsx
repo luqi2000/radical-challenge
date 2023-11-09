@@ -1,4 +1,3 @@
-import ListBestSellersPage from "./ListBestSellersPage";
 import Sidebar from "./Sidebar";
 
 const HomePage = () => {
