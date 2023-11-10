@@ -21,6 +21,14 @@ const ListBestSellersPage = () => {
     setFilteredBooks(filtered);
   };
 
+  const [heartFilledArray, setHeartFilledArray] = useState<boolean[]>(Array(filteredBooks.length).fill(false));
+
+  const handleHeartClick = (index: number) => {
+    const updatedHeartFilledArray = [...heartFilledArray];
+    updatedHeartFilledArray[index] = !updatedHeartFilledArray[index];
+    setHeartFilledArray(updatedHeartFilledArray);
+  };
+
   return (
     <>
       <Container fluid className="mt-5">
@@ -43,8 +51,10 @@ const ListBestSellersPage = () => {
                     <div className="d-flex">
                       <p className="me-5">{book.rank}</p>
                       <p className="me-5">{book.price} GBP</p>
-                      <Button className="border-0 p-0 bg-transparent">
-                        <FaRegHeart className="border-BiBookOpen fs-3" />
+                      <Button className="border-0 p-0 bg-transparent" onClick={() => handleHeartClick(index)}>
+                        <FaRegHeart
+                          className={`border-BiBookOpen fs-3 ${heartFilledArray[index] ? "text-danger" : ""}`}
+                        />
                       </Button>
                     </div>
                   </ListGroup.Item>
