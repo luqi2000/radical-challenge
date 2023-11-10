@@ -10,7 +10,7 @@ const ListBestSellersPage = () => {
 
   return (
     <>
-      <Container fluid>
+      <Container fluid className="mt-5">
         <Row className="vh-100 ">
           <Sidebar />
           <Col className="homepage-bg d-flex flex-column align-items-center">
