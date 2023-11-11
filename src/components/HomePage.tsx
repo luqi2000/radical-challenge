@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { saveBooks } from "../redux/actions";
 
 export interface Book {
+  primary_isbn10: string;
   book_image: string;
   author: string;
   contributor: string;

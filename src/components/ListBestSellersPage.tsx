@@ -1,33 +1,55 @@
 // ListBestSellersPage.tsx
 import React, { useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "./Sidebar";
 import { FaRegHeart } from "react-icons/fa";
 import { BiBookOpen } from "react-icons/bi";
 import Search from "./Search";
 import { RootState } from "../redux/store";
+import { removeFromFavorites } from "../redux/actions";
+import { addToFavorites } from "../redux/actions";
 
 const ListBestSellersPage = () => {
   const allBooks = useSelector((state: RootState) => state.book.books);
-  const [filteredBooks, setFilteredBooks] = useState(allBooks);
+  const favorites = useSelector((state: RootState) => state.book.favorites);
+  const dispatch = useDispatch();
+
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [heartFilledMap, setHeartFilledMap] = useState<Record<string, boolean>>({});
 
   const handleSearch = (searchTerm: string) => {
-    const filtered = allBooks.filter(
-      book =>
-        book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.contributor.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBooks(filtered);
+    setSearchTerm(searchTerm);
   };
 
-  const [heartFilledArray, setHeartFilledArray] = useState<boolean[]>(Array(filteredBooks.length).fill(false));
-
-  const handleHeartClick = (index: number) => {
-    const updatedHeartFilledArray = [...heartFilledArray];
-    updatedHeartFilledArray[index] = !updatedHeartFilledArray[index];
-    setHeartFilledArray(updatedHeartFilledArray);
+  const isBookInFavorites = (bookId: string): boolean => {
+    return favorites.some(favBook => favBook.primary_isbn10 === bookId);
   };
+
+  const handleHeartClick = (bookId: string) => {
+    const isFavorite = isBookInFavorites(bookId);
+
+    if (isFavorite) {
+      dispatch(removeFromFavorites(bookId));
+    } else {
+      const bookToAdd = allBooks.find(book => book.primary_isbn10 === bookId);
+      if (bookToAdd) {
+        dispatch(addToFavorites(bookToAdd));
+      }
+    }
+
+    setHeartFilledMap(prevMap => ({
+      ...prevMap,
+      [bookId]: !isFavorite
+    }));
+  };
+
+  // Filtra i libri in base al termine di ricerca
+  const filteredBooks = allBooks.filter(
+    book =>
+      book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.contributor.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <>
@@ -41,8 +63,10 @@ const ListBestSellersPage = () => {
                 <Search onSearch={handleSearch} />
               </div>
               <ListGroup>
-                {filteredBooks.map((book, index) => (
-                  <ListGroup.Item key={index} className="d-flex justify-content-between flex-column flex-md-row mb-3">
+                {filteredBooks.map(book => (
+                  <ListGroup.Item
+                    key={book.primary_isbn10}
+                    className="d-flex justify-content-between flex-column flex-md-row mb-3">
                     <div className="d-flex">
                       <BiBookOpen className="border-BiBookOpen me-2 fs-3" />
                       <p className="me-1 text-uppercase">{book.author}</p>
@@ -51,9 +75,13 @@ const ListBestSellersPage = () => {
                     <div className="d-flex">
                       <p className="me-5">{book.rank}</p>
                       <p className="me-5">{book.price} GBP</p>
-                      <Button className="border-0 p-0 bg-transparent" onClick={() => handleHeartClick(index)}>
+                      <Button
+                        className="border-0 p-0 bg-transparent"
+                        onClick={() => handleHeartClick(book.primary_isbn10)}>
                         <FaRegHeart
-                          className={`border-BiBookOpen fs-3 ${heartFilledArray[index] ? "text-danger" : ""}`}
+                          className={`border-BiBookOpen fs-3 ${
+                            heartFilledMap[book.primary_isbn10] ? "text-danger" : ""
+                          }`}
                         />
                       </Button>
                     </div>
