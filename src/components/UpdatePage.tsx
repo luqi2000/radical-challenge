@@ -15,7 +15,7 @@ const UpdatePage = () => {
       <Container fluid>
         <Row className="vh-100">
           <Sidebar />
-          <Col className=" homepage-bg mt-5">
+          <Col className="homepage-bg mt-5 d-flex flex-column align-items-center">
             <div className="position-relative text-center mx-auto mt-5 ">
               {bookToUpdate && (
                 <>
@@ -25,28 +25,44 @@ const UpdatePage = () => {
                     style={{ width: "900px", height: "300px" }}
                     className="img-fluid"
                   />
-                  <div className="position-absolute top-50 start-50 translate-middle text-white">
+                  <div
+                    className="position-absolute text-white"
+                    style={{
+                      top: "30%",
+                      left: "50%",
+                      transform: "translate(-50%, -50%)",
+                      textAlign: "center",
+                      width: "100%"
+                    }}>
                     <h2>{bookToUpdate.title}</h2>
                     <p>{bookToUpdate.contributor}</p>
                   </div>
                   <div className="mt-5 ">
-                    <h4>Edit</h4>
-                    <Row className="mt-3">
-                      <Col xs={2} className="custom-bg text-white">
+                    <h4 className="d-flex justify-content-start">Edit</h4>
+                    <Row
+                      className="mt-3 ms-0 
+                    d-flex justify-content-start">
+                      <Col xs={2} className="custom-bg text-white p-2">
                         Cost
                       </Col>
-                      <Col xs={2}>{bookToUpdate?.price}</Col>
+                      <Col xs={2} className="g-0 ">
+                        <input type="text" className="border-0 p-2" defaultValue={bookToUpdate.price}></input>
+                      </Col>
                     </Row>
-                    <Row className="mt-3">
-                      <Col xs={2} className="custom-bg text-white">
+                    <Row className="mt-3 ms-0">
+                      <Col xs={2} className="custom-bg text-white p-2">
                         Rating
                       </Col>
-                      <Col xs={2} className="">
-                        {bookToUpdate.rank}
+                      <Col xs={2} className="g-0">
+                        <input type="text" className="border-0 p-2" defaultValue={bookToUpdate.rank}></input>
                       </Col>
                     </Row>
-                    <Button style={{ borderRadius: "20px 20px 20px 20px" }}>UPDATE</Button>
-                    <div>
+                    <Button
+                      className="d-flex justify-content-center mt-4 w-25 "
+                      style={{ borderRadius: "20px 20px 20px 20px" }}>
+                      UPDATE
+                    </Button>
+                    <div className="d-flex justify-content-start mt-4">
                       Return to:
                       <Link className="border-BiBookOpen" to={"/favourites"}>
                         Favourites
