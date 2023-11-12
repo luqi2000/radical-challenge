@@ -1,8 +1,9 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Image, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import booksPicture from "../assets/booksPicture.webp";
 
 const UpdatePage = () => {
   const { details } = useParams();
@@ -14,14 +15,24 @@ const UpdatePage = () => {
       <Container fluid>
         <Row className="vh-100">
           <Sidebar />
-          <Col>
-            {bookToUpdate && (
-              <div>
-                <img src={bookToUpdate.book_image} alt={bookToUpdate.title} />
-                <h2>{bookToUpdate.title}</h2>
-                <p>{bookToUpdate.contributor}</p>
-              </div>
-            )}
+          <Col className="mt-5">
+            <div className="position-relative text-center mx-auto mt-5 ">
+              {bookToUpdate && (
+                <>
+                  <Image
+                    src={booksPicture}
+                    alt="books"
+                    style={{ width: "900px", height: "300px" }}
+                    className="img-fluid"
+                  />
+                  <div className="position-absolute top-50 start-50 translate-middle text-white">
+                    <h2>{bookToUpdate.title}</h2>
+                    <p>{bookToUpdate.contributor}</p>
+                  </div>
+                </>
+              )}
+            </div>
+            <h4>Edit</h4>
           </Col>
         </Row>
       </Container>
