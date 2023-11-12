@@ -8,8 +8,8 @@ import { saveBooks } from "../redux/actions";
 
 export interface Book {
   primary_isbn10: string;
+  title: string;
   book_image: string;
-  author: string;
   contributor: string;
   price: string;
   rank: number;
@@ -56,7 +56,7 @@ const HomePage = () => {
   const handleSearch = (searchTerm: string) => {
     const filtered = filteredBooks.filter(
       book =>
-        book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         book.contributor.toLowerCase().includes(searchTerm.toLowerCase())
     );
     setFilteredBooks(filtered);

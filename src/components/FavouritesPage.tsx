@@ -29,7 +29,7 @@ const FavouritesPage = () => {
                     <div className="d-flex align-items-center">
                       <BiBookOpen className="border-BiBookOpen me-2 fs-3" />
 
-                      <div className="me-1 text-uppercase">{book.author}</div>
+                      <div className="me-1 text-uppercase">{book.title}</div>
                       <div className="text-secondary me-4">{book.contributor}</div>
                     </div>
                     <div className="d-flex align-items-center">

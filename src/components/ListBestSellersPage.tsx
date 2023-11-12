@@ -44,10 +44,9 @@ const ListBestSellersPage = () => {
     }));
   };
 
-  // Filtra i libri in base al termine di ricerca
   const filteredBooks = allBooks.filter(
     book =>
-      book.author.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       book.contributor.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -69,7 +68,7 @@ const ListBestSellersPage = () => {
                     className="d-flex justify-content-between flex-column flex-md-row mb-3">
                     <div className="d-flex align-items-center">
                       <BiBookOpen className="border-BiBookOpen me-2 fs-3" />
-                      <div className="me-1 text-uppercase">{book.author}</div>
+                      <div className="me-1 text-uppercase">{book.title}</div>
                       <div className="text-secondary">{book.contributor}</div>
                     </div>
                     <div className="d-flex align-items-center">
