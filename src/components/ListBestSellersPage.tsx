@@ -67,14 +67,14 @@ const ListBestSellersPage = () => {
                   <ListGroup.Item
                     key={book.primary_isbn10}
                     className="d-flex justify-content-between flex-column flex-md-row mb-3">
-                    <div className="d-flex">
+                    <div className="d-flex align-items-center">
                       <BiBookOpen className="border-BiBookOpen me-2 fs-3" />
-                      <p className="me-1 text-uppercase">{book.author}</p>
-                      <p className="text-secondary">{book.contributor}</p>
+                      <div className="me-1 text-uppercase">{book.author}</div>
+                      <div className="text-secondary">{book.contributor}</div>
                     </div>
-                    <div className="d-flex">
-                      <p className="me-5">{book.rank}</p>
-                      <p className="me-5">{book.price} GBP</p>
+                    <div className="d-flex align-items-center">
+                      <div className="me-5">{book.rank}</div>
+                      <div className="me-5">{book.price} GBP</div>
                       <Button
                         className="border-0 p-0 bg-transparent"
                         onClick={() => handleHeartClick(book.primary_isbn10)}>

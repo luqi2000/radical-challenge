@@ -18,7 +18,7 @@ const FavouritesPage = () => {
       <Container fluid>
         <Row className="vh-100">
           <Sidebar />
-          <Col className="mt-5 d-flex flex-column align-items-center">
+          <Col className="homepage-bg mt-5 d-flex flex-column align-items-center">
             <div>
               <h4 className="mt-5">Favourites</h4>
               <ListGroup className="mt-5">
