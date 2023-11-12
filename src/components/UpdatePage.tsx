@@ -1,4 +1,4 @@
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -29,10 +29,21 @@ const UpdatePage = () => {
                     <h2>{bookToUpdate.title}</h2>
                     <p>{bookToUpdate.contributor}</p>
                   </div>
+                  <div>
+                    <h4>Edit</h4>
+                    <Row>
+                      <Col>Cost</Col>
+                      <Col>{bookToUpdate?.price}</Col>
+                    </Row>
+                    <Row>
+                      <Col className="">Rating</Col>
+                      <Col className="">{bookToUpdate.rank}</Col>
+                    </Row>
+                    <Button style={{ borderRadius: "20px 20px 20px 20px" }}>UPDATE</Button>
+                  </div>
                 </>
               )}
             </div>
-            <h4>Edit</h4>
           </Col>
         </Row>
       </Container>
