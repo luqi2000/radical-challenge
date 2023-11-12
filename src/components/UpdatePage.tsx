@@ -1,6 +1,6 @@
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import booksPicture from "../assets/booksPicture.webp";
@@ -29,17 +29,30 @@ const UpdatePage = () => {
                     <h2>{bookToUpdate.title}</h2>
                     <p>{bookToUpdate.contributor}</p>
                   </div>
-                  <div>
+                  <div className="mt-5 ">
                     <h4>Edit</h4>
-                    <Row>
-                      <Col>Cost</Col>
-                      <Col>{bookToUpdate?.price}</Col>
+                    <Row className="mt-3">
+                      <Col xs={2} className="custom-bg text-white">
+                        Cost
+                      </Col>
+                      <Col xs={2}>{bookToUpdate?.price}</Col>
                     </Row>
-                    <Row>
-                      <Col className="">Rating</Col>
-                      <Col className="">{bookToUpdate.rank}</Col>
+                    <Row className="mt-3">
+                      <Col xs={2} className="custom-bg text-white">
+                        Rating
+                      </Col>
+                      <Col xs={2} className="">
+                        {bookToUpdate.rank}
+                      </Col>
                     </Row>
                     <Button style={{ borderRadius: "20px 20px 20px 20px" }}>UPDATE</Button>
+                    <div>
+                      Return to:
+                      <Link className="border-BiBookOpen" to={"/favourites"}>
+                        Favourites
+                      </Link>
+                      👈🏻
+                    </div>
                   </div>
                 </>
               )}
