@@ -15,7 +15,7 @@ const UpdatePage = () => {
       <Container fluid>
         <Row className="vh-100">
           <Sidebar />
-          <Col className="mt-5">
+          <Col className=" homepage-bg mt-5">
             <div className="position-relative text-center mx-auto mt-5 ">
               {bookToUpdate && (
                 <>
