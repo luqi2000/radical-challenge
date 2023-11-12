@@ -5,10 +5,12 @@ import { RootState } from "../redux/store";
 import { BiBookOpen } from "react-icons/bi";
 import { FaRegHeart } from "react-icons/fa";
 import { removeFromFavorites } from "../redux/actions";
+import { useNavigate } from "react-router-dom";
 
 const FavouritesPage = () => {
   const favorites = useSelector((state: RootState) => state.book.favorites);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleHeartClick = (bookId: string) => {
     dispatch(removeFromFavorites(bookId));
@@ -35,7 +37,13 @@ const FavouritesPage = () => {
                     <div className="d-flex align-items-center">
                       <div className="me-5">{book.price} GBP</div>
                       <div className="me-5 d-none d-lg-block">{book.rank}</div>
-                      <Button className="border-0 bg-transparent text-secondary">Edit</Button>
+                      <Button
+                        className="border-0 bg-transparent text-secondary"
+                        onClick={() => {
+                          navigate("/update/" + book.primary_isbn10);
+                        }}>
+                        Edit
+                      </Button>
                       <Button className="border-0 bg-transparent text-secondary">Delete</Button>
                       <Button className="border-0 bg-transparent" onClick={() => handleHeartClick(book.primary_isbn10)}>
                         <FaRegHeart className="border-BiBookOpen fs-3" />
