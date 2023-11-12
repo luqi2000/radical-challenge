@@ -24,7 +24,10 @@ const Sidebar = () => {
 
           <Button
             variant="outline"
-            className={`mb-4 ${location.pathname === "/favourites" && "bg-primary"}`}
+            className={`mb-4 ${
+              (location.pathname === "/favourites" && "bg-primary") ||
+              (location.pathname.includes("/update/") && "bg-primary")
+            }`}
             onClick={() => {
               navigate("/favourites");
             }}>
