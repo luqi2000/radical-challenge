@@ -1,5 +1,4 @@
-// ListBestSellersPage.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "./Sidebar";

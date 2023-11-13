@@ -1,4 +1,3 @@
-// Search.tsx
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { BsSearch } from "react-icons/bs";
