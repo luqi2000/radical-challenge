@@ -1,14 +1,40 @@
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import booksPicture from "../assets/booksPicture.webp";
+import { useState } from "react";
+import { updateBook } from "../redux/actions";
 
-const UpdatePage = () => {
-  const { details } = useParams();
+interface UpdatePageProps {}
+
+const UpdatePage: React.FC<UpdatePageProps> = () => {
+  const { details } = useParams<{ details: string }>();
+  const dispatch = useDispatch();
   const books = useSelector((state: RootState) => state.book.books);
   const bookToUpdate = books.find(book => book.primary_isbn10 === details);
+
+  const [updatedData, setUpdatedData] = useState({
+    price: bookToUpdate?.price || "",
+    rank: bookToUpdate?.rank || ""
+  });
+
+  const handleUpdate = () => {
+    const priceInput = document.getElementById("priceInput") as HTMLInputElement | null;
+    const rankInput = document.getElementById("rankInput") as HTMLInputElement | null;
+
+    const updatedPrice = priceInput ? priceInput.value : "";
+    const updatedRank = rankInput ? parseInt(rankInput.value, 10) : 0;
+    if (details && updatedPrice !== undefined && !isNaN(updatedRank)) {
+      dispatch(updateBook({ isbn: details, updatedData: { price: updatedPrice, rank: updatedRank } }));
+
+      setUpdatedData({ price: updatedPrice, rank: updatedRank });
+
+      const updatedBookData = { ...bookToUpdate, price: updatedPrice, rank: updatedRank };
+      localStorage.setItem("updatedBook", JSON.stringify(updatedBookData));
+    }
+  };
 
   return (
     <>
@@ -39,14 +65,12 @@ const UpdatePage = () => {
                   </div>
                   <div className="mt-5 ">
                     <h4 className="d-flex justify-content-start">Edit</h4>
-                    <Row
-                      className="mt-3 ms-0 
-                    d-flex justify-content-start">
+                    <Row className="mt-3 ms-0 d-flex justify-content-start">
                       <Col xs={2} className="custom-bg text-white p-2">
                         Cost
                       </Col>
                       <Col xs={2} className="g-0 ">
-                        <input type="text" className="border-0 p-2" defaultValue={bookToUpdate.price}></input>
+                        <input type="text" id="priceInput" className="border-0 p-2" defaultValue={updatedData.price} />
                       </Col>
                     </Row>
                     <Row className="mt-3 ms-0">
@@ -54,10 +78,11 @@ const UpdatePage = () => {
                         Rating
                       </Col>
                       <Col xs={2} className="g-0">
-                        <input type="text" className="border-0 p-2" defaultValue={bookToUpdate.rank}></input>
+                        <input type="text" id="rankInput" className="border-0 p-2" defaultValue={updatedData.rank} />
                       </Col>
                     </Row>
                     <Button
+                      onClick={handleUpdate}
                       className="d-flex justify-content-center mt-4 w-25 "
                       style={{ borderRadius: "20px 20px 20px 20px" }}>
                       UPDATE
@@ -79,4 +104,5 @@ const UpdatePage = () => {
     </>
   );
 };
+
 export default UpdatePage;

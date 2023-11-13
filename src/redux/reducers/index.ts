@@ -1,6 +1,6 @@
 // reducers.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { saveBooks, addToFavorites, removeFromFavorites, saveFavoritesToLocalStorage } from "../actions";
+import { saveBooks, addToFavorites, removeFromFavorites, saveFavoritesToLocalStorage, updateBook } from "../actions";
 import { Book } from "../../components/HomePage";
 
 interface BookState {
@@ -34,6 +34,10 @@ const bookSlice = createSlice({
       })
       .addCase(saveFavoritesToLocalStorage, (state, action: PayloadAction<Book[]>) => {
         state.favorites = action.payload;
+      })
+      .addCase(updateBook, (state, action: PayloadAction<{ isbn: string; updatedData: Partial<Book> }>) => {
+        const { isbn, updatedData } = action.payload;
+        state.books = state.books.map(book => (book.primary_isbn10 === isbn ? { ...book, ...updatedData } : book));
       });
   }
 });
