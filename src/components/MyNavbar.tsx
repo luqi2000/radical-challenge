@@ -16,8 +16,8 @@ const MyNavbar = () => {
             />
           </Col>
           <Col className="custom-taller-col d-flex align-items-center ps-5">
-            <span className="font-weight-bold fs-4 ">RAD</span>
-            <span className="font-weight-bold fs-4 text-danger">ICAL</span>
+            <span className="font-weight-bold fs-4 ">New York</span>
+            <span className="font-weight-bold fs-4 text-danger">Times</span>
           </Col>
         </Row>
       </Container>

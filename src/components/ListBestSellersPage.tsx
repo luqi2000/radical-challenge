@@ -65,7 +65,7 @@ const ListBestSellersPage = () => {
                   <ListGroup.Item
                     key={book.primary_isbn10}
                     className="d-flex justify-content-between flex-column flex-md-row mb-3">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center me-2">
                       <BiBookOpen className="border-BiBookOpen me-2 fs-3" />
                       <div className="me-1 text-uppercase">{book.title}</div>
                       <div className="text-secondary">{book.contributor}</div>
