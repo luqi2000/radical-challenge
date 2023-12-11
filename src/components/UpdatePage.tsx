@@ -1,4 +1,4 @@
-import { Button, Col, Container, Image, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Image, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,7 @@ const UpdatePage: React.FC<UpdatePageProps> = () => {
   const dispatch = useDispatch();
   const books = useSelector((state: RootState) => state.book.books);
   const bookToUpdate = books.find(book => book.primary_isbn10 === details);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [updatedData, setUpdatedData] = useState({
     price: bookToUpdate?.price || "",
@@ -33,6 +34,7 @@ const UpdatePage: React.FC<UpdatePageProps> = () => {
 
       const updatedBookData = { ...bookToUpdate, price: updatedPrice, rank: updatedRank };
       localStorage.setItem("updatedBook", JSON.stringify(updatedBookData));
+      setShowAlert(true);
     }
   };
 
@@ -87,6 +89,11 @@ const UpdatePage: React.FC<UpdatePageProps> = () => {
                       style={{ borderRadius: "20px 20px 20px 20px" }}>
                       UPDATE
                     </Button>
+                    {showAlert && (
+                      <Alert variant="success" className="mt-3" onClose={() => setShowAlert(false)} dismissible>
+                        Successfully Updated
+                      </Alert>
+                    )}
                     <div className="d-flex justify-content-start mt-4">
                       Return to:
                       <Link className="border-BiBookOpen" to={"/favourites"}>

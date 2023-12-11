@@ -55,7 +55,7 @@ const HomePage = () => {
       <Container fluid className="mt-5">
         <Row className="vh-100">
           <Sidebar />
-          <Col className="homepage-bg d-flex justify-content-center">
+          <Col className="homepage-bg d-flex justify-content-center pt-5">
             <div>
               <div>
                 <div className="mb-4">
