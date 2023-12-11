@@ -1,6 +1,5 @@
 import { Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import Sidebar from "./Sidebar";
-import Search from "./Search";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -21,7 +20,6 @@ const apiUrl = "https://api.nytimes.com/svc/books/v3/lists/full-overview.json";
 const HomePage = () => {
   const [randomImages, setRandomImages] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filteredBooks, setFilteredBooks] = useState<Book[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -42,7 +40,6 @@ const HomePage = () => {
 
         // adding images
         setRandomImages(images);
-        setFilteredBooks(books);
       } catch (error) {
         console.error("Error during fetch API", error);
       } finally {
@@ -53,15 +50,6 @@ const HomePage = () => {
     fetchData();
   }, [dispatch]);
 
-  const handleSearch = (searchTerm: string) => {
-    const filtered = filteredBooks.filter(
-      book =>
-        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        book.contributor.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setFilteredBooks(filtered);
-  };
-
   return (
     <>
       <Container fluid className="mt-5">
@@ -69,7 +57,6 @@ const HomePage = () => {
           <Sidebar />
           <Col className="homepage-bg d-flex justify-content-center">
             <div>
-              <Search onSearch={handleSearch} />
               <div>
                 <div className="mb-4">
                   <Link to="/listBestSellers" style={{ color: "black" }}>
@@ -91,7 +78,6 @@ const HomePage = () => {
                   </Row>
                 )}
               </div>
-              <div className="mt-5"> Favourites</div>
             </div>
           </Col>
         </Row>
